@@ -43,6 +43,11 @@ var predefinedPaths = []ExtensionPath{
 		Path:        filepath.Join(".windsurf", "extensions"),
 		Description: "Windsurf 编辑器",
 	},
+	{
+		Name:        "Kiro",
+		Path:        filepath.Join(".kiro", "extensions"),
+		Description: "Kiro 编辑器",
+	},
 }
 
 func getExtensionsDir() string {
