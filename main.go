@@ -77,7 +77,7 @@ func getExtensionsDir() string {
 	fmt.Printf("[%d] 自定义路径\n", len(predefinedPaths)+1)
 
 	// 获取用户选择
-	choice := promptForSelection(len(predefinedPaths) + 1)
+	choice := promptForSelection(len(predefinedPaths)+1, "请选择扩展目录")
 
 	// 如果选择自定义路径
 	if choice == len(predefinedPaths)+1 {
@@ -182,15 +182,15 @@ func getLatestGitLensPath(extensionsDir string) (string, error) {
 		fmt.Printf("[%d] %s\n", i+1, dir)
 	}
 
-	selectedVersion := promptForSelection(len(gitLensDirs))
+	selectedVersion := promptForSelection(len(gitLensDirs), "请选择要激活的 GitLens 版本")
 	return filepath.Join(extensionsDir, gitLensDirs[selectedVersion-1]), nil
 }
 
-// 提示用户选择版本
-func promptForSelection(maxChoice int) int {
+// 提示用户选择
+func promptForSelection(maxChoice int, prompt string) int {
 	reader := bufio.NewReader(os.Stdin)
 	for {
-		fmt.Print("\n请选择要激活的 GitLens 版本 (输入数字): ")
+		fmt.Printf("\n%s (输入数字): ", prompt)
 		input, _ := reader.ReadString('\n')
 		input = strings.TrimSpace(input)
 
