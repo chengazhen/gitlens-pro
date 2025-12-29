@@ -48,6 +48,11 @@ var predefinedPaths = []ExtensionPath{
 		Path:        filepath.Join(".kiro", "extensions"),
 		Description: "Kiro 编辑器",
 	},
+	{
+		Name: "Antigravity",
+		Path: filepath.Join(".antigravity", "extensions"),
+		Description: "Antigravity 编辑器",
+	},
 }
 
 func getExtensionsDir() string {
