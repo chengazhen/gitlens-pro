@@ -49,9 +49,14 @@ var predefinedPaths = []ExtensionPath{
 		Description: "Kiro 编辑器",
 	},
 	{
-		Name: "Antigravity",
-		Path: filepath.Join(".antigravity", "extensions"),
+		Name:        "Antigravity",
+		Path:        filepath.Join(".antigravity", "extensions"),
 		Description: "Antigravity 编辑器",
+	},
+	{
+		Name:        "Trae",
+		Path:        filepath.Join(".trae", "extensions"),
+		Description: "Trae 编辑器",
 	},
 }
 
