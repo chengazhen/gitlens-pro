@@ -1,28 +1,39 @@
 @echo off
+chcp 65001 >nul
+setlocal
+pushd "%~dp0.." || exit /b 1
 
-:: 创建 bin 目录（如果不存在）
-if not exist bin mkdir bin
+:: Create the output directory if needed.
+if not exist bin mkdir bin || goto build_failed
 
-:: 编译 Windows 版本
+:: Windows
 set GOOS=windows
 set GOARCH=amd64
-go build -o bin\activate.exe
+go build -o bin\activate.exe || goto build_failed
 
-:: 编译 Linux 版本
+:: Linux
 set GOOS=linux
 set GOARCH=amd64
-go build -o bin\activate
+go build -o bin\activate || goto build_failed
 
-:: 编译 MacOS 版本 (Intel)
+:: macOS (Intel)
 set GOOS=darwin
 set GOARCH=amd64
-go build -o bin\activate_mac_amd64
+go build -o bin\activate_mac_amd64 || goto build_failed
 
-:: 编译 MacOS 版本 (M1/M2)
+:: macOS (Apple Silicon)
 set GOOS=darwin
 set GOARCH=arm64
-go build -o bin\activate_mac_arm64
+go build -o bin\activate_mac_arm64 || goto build_failed
 
-echo 构建完成！输出目录：.\bin
+echo Build completed. Output directory: "%CD%\bin"
 
-pause 
+popd
+pause
+exit /b 0
+
+:build_failed
+echo Build failed. See the error above.
+popd
+pause
+exit /b 1
